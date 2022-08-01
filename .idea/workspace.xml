@@ -2,8 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5914a42f-8aae-4a7e-9ee6-de95d40ffe6e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/Skill Squad.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/accountBox/signup.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.cpanel.yml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/launch.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CNAME" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Npm install.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modern-react-login" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Footer/containers/footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Footer/containers/footer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Footer/styles/footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Footer/styles/footer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Navbar/Navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Navbar/Navbar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Navbar/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Navbar/Navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/accountBox/common.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/accountBox/common.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/accountBox/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/accountBox/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/accountBox/loginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/accountBox/loginForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/accountBox/signupForm.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/accountBox/validity.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/accountBox/validity.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/assets/images/logoss.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/logoss.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/~$m install.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/~WRL0003.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/~WRL0004.tmp" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,10 +56,14 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ChangesTree.GroupingKeys" value="" />
+    <property name="DatabaseDriversLRU" value="postgresql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.DirectoryMappings" />
   </component>
   <component name="RunManager">
@@ -63,6 +99,8 @@
       <option name="presentableId" value="Default" />
       <updated>1646392221935</updated>
       <workItem from="1646478576417" duration="912000" />
+      <workItem from="1647758089713" duration="1220000" />
+      <workItem from="1659103315989" duration="2016000" />
     </task>
     <servers />
   </component>

@@ -19,7 +19,9 @@ import { FooterContainer } from './Components/Footer/containers/footer'
 import { AccountBox } from "./Components/accountBox";
 
 const AppContainer = styled.div`
+  
   width: 100%;
+  padding-right: 48px !important;
   height: 100%;
   display: flex;
   flex-direction: column;
