@@ -6,6 +6,7 @@ import $ from 'jquery';
 
 
 import logo from '../assets/logoss.png';
+import RegisterationForm from './../accountBox/RegisterationForm';
 const Navbar = () => {
 const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
 console.log(user);
@@ -84,6 +85,7 @@ useEffect(() =>{
               </NavLink>
             </li>
 
+
             <li className="nav-item">
               <NavLink className="nav-link" to="/about" exact>
                 <i 
@@ -99,18 +101,36 @@ useEffect(() =>{
                 </i>Services
               </NavLink>
             </li>
+            
             <li className="nav-item">
               <NavLink className="nav-link" to="/contact" exact>
-                <i 
-                className="far fa-copy">
-                </i>Contact Us
+                <i className="far fa-copy"> </i>Contact Us
               </NavLink>
             </li>
+
+
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/RegisterationForm" exact>
+                <i className="far fa-copy"> </i>Registeration Form
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/TestPage" exact>
+                <i className="far fa-copy"> </i>Test Page
+              </NavLink>
+              
+            </li>
+
+
+
+
+
+
+
             <li className="nav-item">
               <NavLink className="nav-link" to="/Account" exact>
-                <i 
-                className="far fa-copy">
-                 </i> Account
+                <i className="far fa-copy"> </i> Account
                {/*  <Item href="#action/3.1">Action</Item>
                 <Item href="#action/3.2">Another action</Item> 
              */} </NavLink> 

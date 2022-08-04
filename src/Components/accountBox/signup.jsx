@@ -55,26 +55,6 @@ const validationSchema = yup.object({
 
 export function SignupForm(props) {
 
-  // //Gsignin
-  //   const dispatch = useDispatch();
-  //   const history = useHistory();
-  //   const googleSuccess = async (res) => {
-  //       const result = res?.profileObj;
-  //       const token = res?.tokenId;
-
-    
-  //       try {
-  //        dispatch({ type: AUTH, data: { result, token } });
-    
-  //          history.push('/');
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     };
-  //     const googleError = () => alert('Google Sign In was unsuccessful. Try again later');
-    
-  //     const classes = useStyles();
-  // //Gsignin
   const [show, setShow] = useState(false);
 const { switchToSignin } = useContext(AccountContext);
 
@@ -179,6 +159,8 @@ const formik = useFormik({
   validationSchema: validationSchema,
 });
 
+
+
   return (
  
 
@@ -202,6 +184,7 @@ const formik = useFormik({
           </FieldError>
         </FieldContainer>
         <FieldContainer>
+          
           <Input
             name="email"
             placeholder="Email"

@@ -10,6 +10,7 @@ import {
 import About from './pages/About/About';
 import Contact from './pages/Contact/Contact';
 import Home from './pages/Home/Home';
+import TestPage from './Components/accountBox/TestPage';
 import Services from './pages/Service/Services';
 import Navbar from './Components/Navbar/Navbar';
 import Courses from './pages/Courses/Courses';
@@ -17,6 +18,7 @@ import Courses from './pages/Courses/Courses';
 import styled from "styled-components";
 import { FooterContainer } from './Components/Footer/containers/footer'
 import { AccountBox } from "./Components/accountBox";
+import RegisterationForm from './Components/accountBox/RegisterationForm';
 
 const AppContainer = styled.div`
   
@@ -44,22 +46,37 @@ const App = () => {
         </Route>
         <Route path="/service" exact>
           <Services/>
+
         </Route>
         <Route path="/Courses" exact>
           <Courses />
         </Route>
         <Route path="/contact" exact>
-          <Contact/>
+          <Contact />
         </Route>
+        
+        
+
+
+
+        <Route path="/RegisterationForm" exact>
+          <RegisterationForm />
+        </Route>
+
+        <Route path="/TestPage" exact>
+          <TestPage />
+        </Route>
+
+
         <AppContainer>
       <AccountBox />
     </AppContainer>
       </Switch>
     </main>
+
    
     <FooterContainer />
    </Router>
   );
 }
-
 export default App;

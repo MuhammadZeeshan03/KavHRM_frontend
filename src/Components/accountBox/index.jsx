@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { AccountContext } from "./accountContext";
 import { SignupForm } from "./signup";
 import { FormContainer } from "./common";
-
 import illustration from '../assets/logoss.png';
 
 const BoxContainer = styled.div`
@@ -22,6 +21,7 @@ const BoxContainer = styled.div`
   margin-top:30px;
   margin-bottom:30px;
 `;
+
 
 const TopContainer = styled.div`
   width: 100%;
@@ -104,7 +104,7 @@ const expandingTransition = {
 
 export function AccountBox(props) {
   const [isExpanded, setExpanded] = useState(false);
-  const [active, setActive] = useState("signin");
+  const [active, setActive] = useState("signup");
 
   const playExpandingEffect = () => {
     setExpanded(true);
@@ -146,6 +146,15 @@ export function AccountBox(props) {
             initial={false}
             animate={isExpanded ? "expanded" : "collapsed"}
           />
+          {active === "signup" && (
+            <>
+              <HeaderContainer>
+                <HeaderText>Create </HeaderText> 
+               <HeaderText>Account</HeaderText>
+              </HeaderContainer>
+              <SmallText>Please sign-up to continue!</SmallText>
+            </>
+          )}
           {active === "signin" && (
             <>
               <HeaderContainer>
@@ -155,19 +164,12 @@ export function AccountBox(props) {
               <SmallText>Please sign-in to continue!</SmallText>
             </>
           )}
-          {active === "signup" && (
-            <>
-              <HeaderContainer>
-                <HeaderText>Create </HeaderText>
-                <HeaderText>Account</HeaderText>
-              </HeaderContainer>
-              <SmallText>Please sign-up to continue!</SmallText>
-            </>
-          )}
+          
         </TopContainer>
         <InnerContainer>
-          {active === "signin" && <LoginForm />}
           {active === "signup" && <SignupForm />}
+          {active === "signin" && <LoginForm />}
+          
         </InnerContainer>
       </BoxContainer>
     </AccountContext.Provider>
