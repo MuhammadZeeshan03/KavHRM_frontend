@@ -1,7 +1,5 @@
-import React, { useState ,useContext } from "react";
-import { Field, useFormik } from "formik";
-
-// import UseNavigate from 'react-router-dom'
+import React, { useState ,useContext} from "react";
+import jwt_decode from "jwt-decode";
 import {
   BoldLink,
   BoxContainer,
@@ -14,80 +12,79 @@ import {
   SubmitButton,
 } from "./common";
 import { Marginer } from "../marginer";
-import * as yup from "yup";
 import axios from "axios";
 import { AccountContext } from "./accountContext";
-import PropTypes from 'prop-types';
-// const validationSchema = yup.object({
-//   username: yup.string().required(),
-//   password: yup.string().required(),
-// });
+import { Link, Redirect, Route } from "react-router-dom";
+import RegisterationForm from "./RegisterationForm";
 
-export function LoginForm(props) {
-  const { switchToSignup } = useContext(AccountContext);
+function LoginForm(props) {
+
+  const [inpval,setInpval]=useState({
+    username:"",
+    password:""
+})
+
+let [ authTokens, setAuthTokens] = useState(() => (localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) :  null))
+let [user, setUser] = useState(()=> (localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) :  null))
+
+let contextData = {
+  user:user,
+}
+  const { switchToSignup, switchToRegister } = useContext(AccountContext);
   const [error, setError] = useState(null);
+const loginUser = async (e)=>{
+  e.preventDefault()
+  console.log("Form Submitted")
+  let response = await fetch('http://127.0.0.1:8000/Kavtech/login/',{
+    method:'POST',
+    headers:{
 
-  const onSubmit = async (values) => {
-    setError(null);
-    const response = await axios
-      .post("http://127.0.0.1:8000/Kavtech/login/", values)
-      .catch((err) => {
-        if (err && err.response) setError(err.response.data.message);
-      });
+      'Content-Type':'application/json'
+    },
+    body:JSON.stringify({'email':e.target.email.value, 'password':e.target.password.value})
+  })
+  let data =await response.json()
+  if (response.status === 200){
+            setAuthTokens(data)
+            setUser(data.access)
+        console.log('data:', data)
+        localStorage.setItem('authTokens', JSON.stringify(data))
+        alert("Login Successs!!!");
+       
+  }else{
+            alert("Invalid User or Password !")
+    
+  }
+ 
+  }
 
-    if (response) {
-alert("Loging You In!!!")
-
-    }
-  };
-
-  const formik = useFormik({
-    initialValues: { username: "", password: "" },
-    validateOnBlur: true,
-    onSubmit,
-    // validationSchema: validationSchema,
-  });
-
+// Logout user
+let logoutUser = () => {
+  setAuthTokens(null)
+  setUser(null)
+  localStorage.removeItem('authTokens')
+}
   return (
     <BoxContainer>
       <FormError>{error ? error : ""}</FormError>
-      <FormContainer onSubmit={formik.handleSubmit}>
-        <FieldContainer>
-          <Input
-            name="username"
-            placeholder="username"
-            value={formik.values.username}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          {
-            <FieldError>
-              {formik.touched.username && formik.errors.username
-                ? formik.errors.username
-                : ""}
-            </FieldError>
-          }
-        </FieldContainer>
-        <FieldContainer>
-          <Input
+       
+
+      <FormContainer onSubmit={loginUser}>
+           <Input
+            name="email"
+            placeholder="Email"
+            // onChange={getData}
+                      />
+           <Input
             name="password"
             type="password"
             placeholder="Password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          {
-            <FieldError>
-              {formik.touched.password && formik.errors.password
-                ? formik.errors.password
-                : ""}
-            </FieldError>
-          }
-        </FieldContainer>
-        <MutedLink href="#">Forgot Password?</MutedLink>
+            // onChange={getData}
+        />
+
+         <MutedLink href="#">Forgot Password?</MutedLink>
         <Marginer direction="vertical" margin="1em" />
-        <SubmitButton type="submit" disabled={!formik.isValid}>
+        <SubmitButton type="submit" >
           Login
         </SubmitButton>
       </FormContainer>
@@ -98,6 +95,8 @@ alert("Loging You In!!!")
           sign up
         </BoldLink>
       </MutedLink>
+
     </BoxContainer>
   );
 }
+export default LoginForm

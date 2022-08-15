@@ -1,312 +1,279 @@
 import React, { useContext,useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import zxcvbn from 'zxcvbn';
-import { Button, Checkbox, Input, Link, Radio, RadioGroup } from '@material-ui/core';
+import { Button, Checkbox, Link, Radio, RadioGroup } from '@material-ui/core';
 import { FormControl,FormControlLabel,FormLabel  } from '@mui/material';
-import { useRadioGroup } from '@mui/material/RadioGroup';
 import { useFormik } from "formik";
-import {GoogleLogin} from 'react-google-login';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import Icon  from './icon';
-import useStyles from './styles';
-import * as yup from "yup";
 import axios from "axios";
-import { AUTH } from '../../Components/constants/actionTypes';
 import {
-  BoldLink,
-  TextArea,
-  FieldContainer_RF2,
-
-  BoxContainer,
   FieldContainer_RF,
-  FieldError,
-  FormContainer,
-  FormSuccess,
-  Input_RF,
-  Input_RF2,
-  Label,
-  MutedLink,
-  SubmitButton,
-  FormError,
-  Validity
-} from "./common";
+  BoxContainer_RF,
+  FormContainer_RF,
+  Input,
+  Label_RF,
+  SubmitButton
+}
+ from "./common";
 import { Marginer } from "./../marginer/index";
 import { AccountContext } from "./accountContext";
 import './validity.css';
-import { nodeName } from "jquery";
-import validator from 'validator'
-
-
-
-
 
 
 function RegisterationForm(props) {
-
-  const [ password, setPassword] = useState('');
-  const testResult = zxcvbn(password);
-  
-const num = testResult.score * 100/4;
-  
-
-
-const [errorMessage, setErrorMessage] = useState('')
-const [success, setSuccess] = useState(null);
-const [error, setError] = useState(null);
-  
 const onSubmit = async (values) => {
-  const { confirmPassword, ...data } = values;
+  const {...data} = values;
 
-  const response = await axios
-    .post("http://127.0.0.1:8000/Kavtech/register/", data)
+
+const response = await axios
+    .post("http://127.0.0.1:8000/Kavtech/profile/", data)
+
+    
     .catch((err) => {
-      if (err && err.response) setError(err.response.data.message);
-      setSuccess(null);
-    });
+      console.log(err)
+});
 
   if (response && response.data) {
-    setError(null);
-    setSuccess(response.data.message);
     formik.resetForm();
   }
 };
+//Redirection
+//Redirection
 
-
-
-
-  const changePasswordColor =   () => ( {
-    width : `${num}%`,
-    background :  funcProgressColor(),
-    height : ' 6px'
-  })
-
-  const funcProgressColor = () => {
-    switch(testResult.score) {
-      case 0:
-        return '#828282';
-      case 1:
-        return '#EA1111';
-      case 2:
-        return '#FFAD00';
-      case 3:
-        return '#9bc158';
-      case 4:
-        return '#00b500';
-        default:
-          return nodeName;
-      
-    }
-  }
-
-  const [show, setShow] = useState(false);
-  // const { switchToSignin } = useContext(AccountContext);
-  const handleShowHide =() =>{
-    setShow(!show);
-    //  PasswordStrength meter
-  };
-
-  const formik = useFormik({
+const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName:"",
-      email: "",
-      password: "",
       
-    },
-    validateOnBlur: true,
+      first_name: "",
+      last_name:"",
+      email: "",
+      birth_date:"",
+      sched_test:"",
+      job_openings:"",
+      experience:"",
+      b_degree:"",
+      b_institute:"",
+      m_degree:"",
+      m_institute:"",
+      phd_degree:"",
+      phd_institute:"",
+
+  },
+  validateOnBlur: true,
+    onSubmit,
 
   });
+  
+  
   
   return (
  
 <>
+
 <br/>
 <br/>
+
+
 <FieldContainer_RF>
-<FieldContainer_RF2>
+
 <br/>
 <br/>
-<BoxContainer>
+<BoxContainer_RF>
   
-  <FormContainer onSubmit={formik.handleSubmit}>    
+  <FormContainer_RF onSubmit={formik.handleSubmit}>   
 
-  <Label>First Name:   
-<br/>
-<Input_RF
- type='text'
- name="firstName"
-placeholder="Enter Your Last Name"
- />
-</Label>
-<br/>
+ <Label_RF>First Name:   <br/>
+          <Input
+          type='text'
+          name="first_name"
+          placeholder="Enter Your Last Name"
+          value={formik.values.first_name}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          required/></Label_RF><br/> 
+          <Label_RF>Last Name:   
+          <br/>
+          <Input 
+          type='text'
+          name="last_name"
+          placeholder="Enter Your Last Name"
+          value={formik.values.last_name}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          required />
+          </Label_RF>
+          <br/>
+          <Label_RF>Email:   
 
-<Label>Last Name:   
-<br/>
-<Input_RF 
- type='text'
- name="lastName"
-placeholder="Enter Your Last Name"
-value={formik.values.lastName}
-onChange={formik.handleChange}
-onBlur={formik.handleBlur} 
-required />
-</Label>
-<br/>
-<Label>Email:   
-
-<br/>
- <Input_RF 
- type={'email'}
- name="email"
-placeholder="Enter Your Email"
-value={formik.values.email}
-onChange={formik.handleChange}
-onBlur={formik.handleBlur} 
-required />
-</Label>
-<br/>
+          <br/>
+          <Input 
+          type={'email'}
+          name="email"
+          placeholder="Enter Your Email"
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          required />
+          </Label_RF>
+          <br/>
 
 
-<Label>Date of Birth:   
-<br/>
- <Input_RF 
- type={'date'}
- name="DoB"
-placeholder="Enter Your Date of Birth"
-value={formik.values.DoB}
-onChange={formik.handleChange}
-onBlur={formik.handleBlur} 
-required />
-</Label>
+          <Label_RF>Date of Birth:   
+          <br/>
+          <Input 
+          type='date'
+          name="DoB"
+          placeholder="Enter Your Date of Birth"
 
-<br/>
+          value={formik.values.DoB}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          required />
+          </Label_RF>
 
-<h3>Education:</h3>
-<Label>Bachlors:  
-  <br/> 
- <Input_RF2
- type={'text'} 
- name="firstName"
-placeholder="Degree"
+          <br/>
+          <Label_RF>Education  <h7 style={{color:"red"}}>*</h7></Label_RF>
+          
+          <Label_RF>Bachelors:  
+            <br/> 
 
-required />
- <Input_RF
- type={'text'} 
- name="firstName"
-placeholder="Institute"
-required />
-</Label>
-<br/>
-
-<Label>Masters:  
-  <br/> 
- <Input_RF2
- type={'text'} 
- name="M_degree"
-placeholder="Degree"
-
-/>
- <Input_RF
- type={'text'} 
- name="firstName"
-placeholder="Institute"
-
-/>
-</Label>
-<br/>
-<Label>PHD:  
-  <br/> 
- <Input_RF2
- type={'text'} 
- name="P_degree"
-placeholder="Degree"
-
-/>
- <Input_RF
- type={'text'} 
- name="firstName"
-placeholder="Institute"
-/>
-</Label>
-<br/>
+          <Input
+          type='text'
+          name="b_degree"
+          onChange={formik.handleChange}
+          value={formik.values.b_degree}
+          placeholder="Degree"
+          required />
+          <Input
+          type='text' 
+          name="b_institute"
+          onChange={formik.handleChange}
+          value={formik.values.b_institute}
+          placeholder="Institute" required />
+          </Label_RF>
+          <br/>
 
 
 
 
-<Label>Experience: 
-  <br/>
-  <select>
-  <option value="Fresher">Fresher</option>
-  <option value="junior">1-2 years</option>
-  <option selected value="senior">2-5 years</option>
-  <option value="seniorMost">Above 5 years</option>
-</select>
-        <br/>  
-</Label>
-<br/>
 
 
-<Label>Job Openings(Apply For): 
-  <br/>
-  <Checkbox type="checkbox" value="IT" name="job_opening" /> IT/Infrastructure
-  <br/>
-        <Checkbox type="checkbox" value="data_eng" name="job_opening" /> Data Engineering
-        <br/>
-        <Checkbox type="checkbox" value="data_sci" name="job_opening" /> Data Science
-        <br/>  
-        <Checkbox type="checkbox" value="management" name="job_opening" /> management
-        <br/>  
-</Label>
-<br/>
+          <Label_RF>Masters:  
+            <br/> 
+          <Input
+          type={'text'} 
+          name="m_degree"
+          placeholder="Degree"
+          />
+          <Input
+          type={'text'} 
+          name="m_institute"
+          placeholder="Institute"
 
-<Label>CV/Resume:  
-  <br/> 
- <Input_RF
- type={'file'} 
- name="file"
-placeholder="Enter Your First Name"
-required />
-</Label>
-<br/>
+          />
+          </Label_RF>
+          <br/>
+          <Label_RF>PHD:  
+            <br/> 
+          <Input
+          type='text' 
+          name="phd_degree"
+          placeholder="Degree"
 
-<Label>Test Schedule:
-  <br/>
-
-  <FormControl>
-
-  <RadioGroup
-    aria-labelledby="demo-radio-buttons-group-label"
-    defaultValue="female"
-    name="radio-buttons-group"
-  >
-    <FormControlLabel value="now" control={<Radio />} label="now" />
-    <FormControlLabel value="later" control={<Radio />} label="later" />
-
-  </RadioGroup>
-</FormControl>
+          />
+          <Input
+          type={'text'} 
+          name="phd_institute"
+          placeholder="Institute"
+          />
+          </Label_RF>
+          <br/>
 
 
-  </Label>
+          <Label_RF>Experience: 
+            <br/>
+            <select name="experience" onChange={formik.handleChange}  value={formik.values.experience}>
+            <option  value="Fresher" selected>Fresher</option>
+            <option  value="1-2 years">1-2 years</option>
+            <option   value="2-5 Years">2-5 years</option>
+            <option  value="Above 5 years">Above 5 years</option>
+          </select>
+          <br/>  
+          </Label_RF>
+          <br/>
 
 
 
+            <Label_RF>Job Openings(Apply For): 
+              <br/>
+              <Checkbox type="checkbox" onChange={formik.handleChange} value="IT" required name="job_openings" /> IT/Infrastructure
+              <br/> 
+                    <Checkbox type="checkbox" onChange={formik.handleChange} value={formik.values.job_openings} name="job_openings"/> Data Engineering
+                    <br/>
+                    <Checkbox type="checkbox" onChange={formik.handleChange} value="data_science" name="job_openings" /> Data Science
+                    <br/>  
+                    <Checkbox type="checkbox" onChange={formik.handleChange} value="management" name="job_openings" /> management
+                    <br/>   
+            </Label_RF>
+            <br/>
 
-        <br/>
-        <br/>
-        <br/>
+            <Label_RF>CV/Resume:  
+              <br/> 
+            <Input
+            type={'file'} 
+            name="file"
+            placeholder="Enter Your First Name"
+            required />
+            </Label_RF>
+            <br/>
+
+            <Label_RF>Test Schedule:
+              <br/>
+
+              <FormControl required>
+
+              <RadioGroup aria-labelledby="demo-radio-buttons-group-label" 
+                defaultValue="now" 
+                name="radio-buttons-group">
+                <FormControlLabel onChange={formik.handleChange} value="now" name="sched_test" control={<Radio />} label="now" />
+                <FormControlLabel onChange={formik.handleChange}  value="later" name="sched_test" control={<Radio />} label="later" />
+
+            <SubmitButton type="submit"> submit</SubmitButton>
 
 
-  </FormContainer>
- 
-</BoxContainer>
-</FieldContainer_RF2>
+            </RadioGroup>
+            </FormControl>
+            </Label_RF>
+                    {/* <br/>
+                    <br/>
+                    <br/>
+            <br/>
+            {formik.values.first_name}
+            <br/>
+            {formik.values.last_name}
+            <br/>
+            {formik.values.email}
+            <br/>
+            {formik.values.DoB}
+            <br/>
+            {formik.values.job_openings}
+            <br/>
+            {formik.values.b_degree}
+
+            {formik.values.experience}
+            <br/>
+            {formik.values.b_institute}
+            <br/>
+            {formik.values.sched_test}
+            <br/> */}
+
+</FormContainer_RF>
+</BoxContainer_RF>
+
 </FieldContainer_RF>
+
 <br/>
 <br/>
 <br/>
 </>
   );
-}
+ }
 
 export default RegisterationForm

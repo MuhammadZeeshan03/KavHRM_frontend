@@ -7,7 +7,7 @@ import { Button,Link } from '@material-ui/core';
 import { useFormik } from "formik";
 import {GoogleLogin} from 'react-google-login';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import Icon  from './icon';
 import useStyles from './styles';
 import * as yup from "yup";
@@ -32,11 +32,11 @@ import './validity.css';
 import { nodeName } from "jquery";
 import validator from 'validator'
 
-
+const history = useHistory
 const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 
 const validationSchema = yup.object({
-  username: yup
+  name: yup
     .string()
     .min(3, "Please enter you real name")
     .required("Full name is required!"),
@@ -135,21 +135,24 @@ const onSubmit = async (values) => {
 
   const response = await axios
     .post("http://127.0.0.1:8000/Kavtech/register/", data)
+    
     .catch((err) => {
       if (err && err.response) setError(err.response.data.message);
       setSuccess(null);
+     
     });
 
   if (response && response.data) {
     setError(null);
     setSuccess(response.data.message);
     formik.resetForm();
+    history.push('/login')
   }
 };
 
 const formik = useFormik({
   initialValues: {
-    username: "",
+    name: "",
     email: "",
     password: "",
     
@@ -171,15 +174,15 @@ const formik = useFormik({
       <FormContainer onSubmit={formik.handleSubmit}>
       <FieldContainer>
           <Input
-            name="username"
+            name="name"
             placeholder="Username"
-            value={formik.values.username}
+            value={formik.values.name}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
           <FieldError>
-            {formik.touched.username && formik.errors.username
-              ? formik.errors.username
+            {formik.touched.name && formik.errors.name
+              ? formik.errors.name
               : ""}
           </FieldError>
         </FieldContainer>
@@ -244,9 +247,10 @@ const formik = useFormik({
            </div>
       
       <Marginer direction="vertical" margin="1em" />
-        <SubmitButton type="submit" disabled={!formik.isValid}>
-          Signup
+        <SubmitButton type="submit" disabled={!formik.isValid}  onClick={switchToSignin}>
+          Signup 
         </SubmitButton>
+        
         </FormContainer>
     <Marginer direction="vertical" margin={5} />
       <MutedLink href="#">

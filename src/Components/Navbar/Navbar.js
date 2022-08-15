@@ -6,10 +6,10 @@ import $ from 'jquery';
 
 
 import logo from '../assets/logoss.png';
-import RegisterationForm from './../accountBox/RegisterationForm';
+import RegisterationForm from '../../Components/accountBox/RegisterationForm';
 const Navbar = () => {
-const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
-console.log(user);
+  let [user, setUser] = useState(()=> (localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) :  null))
+  console.log(user);
 useEffect(() =>{
   const token = user?.token;
   //JWT
@@ -126,16 +126,28 @@ useEffect(() =>{
 
 
 
-
-
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/Account" exact>
-                <i className="far fa-copy"> </i> Account
+            {user ? (
+              <li className="nav-item">
+              <NavLink className="nav-link" to="/logout" exact>
+                <i className="far fa-copy"> </i> LOgout
                {/*  <Item href="#action/3.1">Action</Item>
                 <Item href="#action/3.2">Another action</Item> 
              */} </NavLink> 
             </li>
+            ) : (
+              <li className="nav-item">
+              <NavLink className="nav-link" to="/login" exact>
+                <i className="far fa-copy"> </i> LOGIN
+               {/*  <Item href="#action/3.1">Action</Item>
+                <Item href="#action/3.2">Another action</Item> 
+             */} </NavLink> 
+            </li>
+
+            )}
+
+            
         </ul>
+        
       </div>
   </nav>
   )

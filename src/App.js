@@ -5,8 +5,8 @@ import {
   Redirect,
   Switch
 } from 'react-router-dom';
-
-
+import { AuthProvider} from './Components/accountBox/accountContext'
+import PrivateRoute from './pages/Home/PrivateRoute'
 import About from './pages/About/About';
 import Contact from './pages/Contact/Contact';
 import Home from './pages/Home/Home';
@@ -23,12 +23,23 @@ import RegisterationForm from './Components/accountBox/RegisterationForm';
 const AppContainer = styled.div`
   
   width: 100%;
-  padding-right: 48px !important;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  padding-left: 20px;
+  display: -webkit-flex;
+ 
+  @media only screen and (max-width: 727px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+   
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    
+
+}
+ 
 `;
 
 const App = () => {
@@ -54,14 +65,12 @@ const App = () => {
         <Route path="/contact" exact>
           <Contact />
         </Route>
+     
+          <PrivateRoute path="/RegisterationForm" exact>
+            <RegisterationForm />
+          </PrivateRoute>
         
         
-
-
-
-        <Route path="/RegisterationForm" exact>
-          <RegisterationForm />
-        </Route>
 
         <Route path="/TestPage" exact>
           <TestPage />
